@@ -135,7 +135,7 @@ class _Music_screenState extends State<Music_screen> {
                       )),
                   IconButton(
                     onPressed: () {
-                      trueprovider!.playorpause();
+                      // trueprovider!.playorpause();
                     },
                     icon: Icon(
                         trueprovider!.icon ? Icons.pause : Icons.play_arrow,

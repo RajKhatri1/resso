@@ -14,6 +14,11 @@ class _songState extends State<song> {
   Homeprovider? trueprovider;
   Homeprovider? falseprovider;
   @override
+  void initState() {
+    super.initState();
+    Provider.of<Homeprovider>(context,listen: false).allsong();
+  }
+  @override
   Widget build(BuildContext context) {
     int ind = ModalRoute.of(context)?.settings.arguments as int;
     trueprovider = Provider.of<Homeprovider>(context, listen: true);
@@ -98,23 +103,31 @@ class _songState extends State<song> {
                 ),
                 IconButton(
                   onPressed: () {
-                    trueprovider!.playorpause();
+                    falseprovider!.playAudio();
                   },
                   icon: Icon(
-                      trueprovider!.icon ? Icons.pause : Icons.play_arrow,
+                      Icons.play_arrow,
                       color: Colors.white,
                       size: 35),
                 ),
                 IconButton(
                   onPressed: () {
-                    trueprovider!.nextsong();
-                    trueprovider!.nextimg();
+                    falseprovider!.pauseAudio();
+                  },
+                  icon: Icon(Icons.pause ,
+                      color: Colors.white,
+                      size: 35),
+                ),
+                IconButton(
+                  onPressed: () {
+                    falseprovider!.nextsong();
+                    falseprovider!.nextimg();
                   },
                   icon: Icon(Icons.skip_next, color: Colors.white, size: 35),
                 ),
                 IconButton(
                   onPressed: () {
-                    trueprovider!.muteorunmute();
+                    falseprovider!.muteorunmute();
                   },
                   icon: Icon(
                       trueprovider!.ismute

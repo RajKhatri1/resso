@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:resso/utlis/variables.dart';
 
 import '../provider/homeprovider.dart';
 
@@ -13,11 +14,14 @@ class music2 extends StatefulWidget {
 class _music2State extends State<music2> {
   Homeprovider? trueprovider;
   Homeprovider? falseprovider;
+
   @override
   void initState() {
     super.initState();
-    Provider.of<Homeprovider>(context, listen: false).comaudio();
+    Provider.of<Homeprovider>(context,listen: false).initaudio();
+
   }
+
   @override
   Widget build(BuildContext context) {
     trueprovider = Provider.of<Homeprovider>(context, listen: true);
@@ -62,7 +66,7 @@ class _music2State extends State<music2> {
                 height: 500,
                 width: double.infinity,
                 color: Colors.white,
-                child: Image.asset("assets/images/company.jpg", fit: BoxFit.cover),
+                child: Image.asset("${falseprovider!.immg[jenil]}", fit: BoxFit.cover),
               ),
               SizedBox(
                 height: 20,
@@ -125,7 +129,7 @@ class _music2State extends State<music2> {
                 children: [
                   InkWell(
                       onTap: () {
-                        falseprovider!.playmusic();
+                        falseprovider!.previoussong();
                       },
                       child: Icon(
                         Icons.skip_previous,
@@ -134,16 +138,24 @@ class _music2State extends State<music2> {
                       )),
                   IconButton(
                     onPressed: () {
-                      trueprovider!.playorpause();
+                      falseprovider!.playAudio();
                     },
                     icon: Icon(
-                        trueprovider!.icon ? Icons.pause : Icons.play_arrow,
+                        Icons.play_arrow,
+                        color: Colors.white,
+                        size: 35),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      falseprovider!.pauseAudio();
+                    },
+                    icon: Icon(Icons.pause ,
                         color: Colors.white,
                         size: 35),
                   ),
                   InkWell(
                       onTap: () {
-                        falseprovider!.playmusic();
+                        falseprovider!.nextsong();
                       },
                       child: Icon(
                         Icons.skip_next,
@@ -152,7 +164,7 @@ class _music2State extends State<music2> {
                       )),
                   IconButton(
                     onPressed: () {
-                      trueprovider!.muteorunmute();
+                      falseprovider!.muteorunmute();
                     },
                     icon: Icon(
                         trueprovider!.ismute

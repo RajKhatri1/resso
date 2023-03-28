@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:resso/main.dart';
+import 'package:resso/utlis/variables.dart';
+
+import '../provider/homeprovider.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -8,8 +13,13 @@ class Home_screen extends StatefulWidget {
 }
 
 class _Home_screenState extends State<Home_screen> {
+  Homeprovider? trueprovider;
+  Homeprovider? falseprovider;
+
   @override
   Widget build(BuildContext context) {
+    trueprovider = Provider.of<Homeprovider>(context, listen: true);
+    falseprovider = Provider.of<Homeprovider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -226,143 +236,16 @@ class _Home_screenState extends State<Home_screen> {
                 SizedBox(
                   height: 10,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, 'badshah');
-                            },
-                            child: Container(
-                              height: 150,
-                              width: 120,
-                              color: Colors.white,
-                              child: Image.asset("assets/images/bad.jpg",
-                                  fit: BoxFit.cover),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Badshah",
-                            style: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 3,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Rapper",
-                            style: TextStyle(
-                              color: Colors.white60,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 150,
-                            width: 120,
-                            color: Colors.white,
-                            child: Image.asset("assets/images/nehu.jpg",
-                                fit: BoxFit.cover),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Neha kakkar",
-                            style: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 2,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Singer",
-                            style: TextStyle(
-                              color: Colors.white60,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 150,
-                            width: 120,
-                            color: Colors.white,
-                            child: Image.asset("assets/images/aru.jpg",
-                                fit: BoxFit.cover),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Arijit sing",
-                            style: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 2,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Singer",
-                            style: TextStyle(
-                              color: Colors.white60,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 150,
-                            width: 120,
-                            color: Colors.white,
-                            child: Image.asset("assets/images/arman.jpg",
-                                fit: BoxFit.cover),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Armaan Malik",
-                            style: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 2,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Singer",
-                            style: TextStyle(
-                              color: Colors.white60,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                    Container(
+                      height: 200,
+                      margin: EdgeInsets.all(15),
+                      width: double.infinity,
+                      child: GridView.builder(scrollDirection: Axis.horizontal,shrinkWrap: true,gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),itemCount: falseprovider!.artist.length, itemBuilder: (context, index) {
+                        return InkWell(onTap: () {
+                          Navigator.pushNamed(context, 'badshah', arguments: index);
+                        },child: diya(index));
+                      },),
+                    ), 
                 SizedBox(
                   height: 20,
                 ),
@@ -375,244 +258,25 @@ class _Home_screenState extends State<Home_screen> {
                       letterSpacing: 2),
                 ),
                 SizedBox(
-                  height: 20 ,
+                  height: 20,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Expanded(
-                      //   child: GridView.builder(itemCount: 2 ,shrinkWrap: true,gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (context, index) {
-                      //     return song();
-                      //   },),
-                      // ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, 'Music');
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  color: Colors.white,
-                                  child: Image.asset(
-                                    "assets/images/man.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: 20,),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Maan Meri Jaan",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "King",
-                                      style: TextStyle(color: Colors.white60),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, 'Music1');
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  color: Colors.white,
-                                  child: Image.asset(
-                                    "assets/images/apna.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: 20,),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Apna bana le..(mix)",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Arijit sing",
-                                      style: TextStyle(color: Colors.white60),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context,  'Music2');
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  color: Colors.white,
-                                  child: Image.asset(
-                                    "assets/images/company.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: 20,),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Company",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Emiway Bantai",
-                                      style: TextStyle(color: Colors.white60),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 30,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, 'Music3 ');
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  color: Colors.white,
-                                  child: Image.asset(
-                                    "assets/images/woh.jpeg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: 20,),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "WOH",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Ikka,Dino James,Badsh...",
-                                      style: TextStyle(color: Colors.white60),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, 'Music4');
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  color: Colors.white,
-                                  child: Image.asset(
-                                    "assets/images/ek.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: 20,),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Ek din pyar",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Mc Stan",
-                                      style: TextStyle(color: Colors.white60),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          InkWell(
-                            onTap: () {
-                                Navigator.pushNamed(context, 'Music5');
-                            },
-                            child: Row (
-                              children: [
-                                Container(
-                                  height: 70,
-                                  width: 70,
-                                  color: Colors.white,
-                                  child: Image.asset(
-                                    "assets/images/lehnga.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: 20,),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Lehanga",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "Jass Manak",
-                                      style: TextStyle(color: Colors.white60),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                Container(
+                  height: 200,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: 6,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      // return Container(height: 100,width: 100,color: Colors.red,margin: EdgeInsets.all(5),);
+                      return InkWell(
+                          onTap: () {
+                            jenil = index;
+                            Navigator.pushNamed(context, 'Music2');
+                          },
+                          child: rajj(index));
+                    },
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3, mainAxisExtent: 300),
                   ),
                 ),
               ],
@@ -620,6 +284,84 @@ class _Home_screenState extends State<Home_screen> {
           ),
         ),
       ),
+    );
+  }
+  Widget diya(index)
+  {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, 'badshah');
+          },
+          child: Container(
+            height: 150,
+            width: 120,
+            color: Colors.white,
+            child: Image.asset("${falseprovider!.artist[index]}",
+                fit: BoxFit.cover),
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(
+          "${falseprovider!.artname[index]}",
+          style: TextStyle(
+              color: Colors.white,
+              letterSpacing: 3,
+              fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "${falseprovider!.artsub[index]}",
+          style: TextStyle(
+            color: Colors.white60,
+            letterSpacing: 1,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget rajj(int index) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: 70,
+          width: 70,
+          color: Colors.yellow,
+          child: Image.asset(
+            "${falseprovider!.immg[index]}",
+            fit: BoxFit.cover,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${falseprovider!.naam[index]}",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "${falseprovider!.subnaam[index]}",
+              style: TextStyle(color: Colors.white60),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        )
+      ],
     );
   }
 }
